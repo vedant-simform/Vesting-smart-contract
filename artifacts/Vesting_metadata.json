@@ -17,19 +17,6 @@
 				"type": "constructor"
 			},
 			{
-				"inputs": [],
-				"name": "_elaspTime",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -84,7 +71,7 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "name",
+						"name": "account",
 						"type": "address"
 					}
 				],
@@ -94,19 +81,6 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -126,12 +100,53 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "vestedTokens",
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "vestingSchedules",
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "",
+						"name": "_startTime",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_cliff",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_vestingPeriod",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_slicePeriod",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_totalTokens",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_releasedTokens",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_vestedTokens",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_elaspTime",
 						"type": "uint256"
 					}
 				],
@@ -184,7 +199,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"Vesting.sol": "Vesting"
+			"multiUser.sol": "Vesting"
 		},
 		"evmVersion": "paris",
 		"libraries": {},
@@ -206,12 +221,12 @@
 				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
 			]
 		},
-		"Vesting.sol": {
-			"keccak256": "0xea5818ee3fa97d2f9328965a943aefd196e6e2125e1a703d409154655c4a5fa0",
+		"multiUser.sol": {
+			"keccak256": "0x931b546d021af34aa52b0b5b4764a40152653c6156981afce597c666510d6702",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://139421c4cc845287a3d3b205b0f638dc5e1a65dfbcd72f529b16a5a1452ce676",
-				"dweb:/ipfs/QmZzpg2Ut9jfnsfDCaJdBV8DxzE8Va1YqnyK14L8sbF2NR"
+				"bzz-raw://c9151fdce587b7960d10c0d039e6823034a55433a642661829b766051da769c3",
+				"dweb:/ipfs/QmYD9EUwk7PiSZHeNAvarBsUeMyf2yxeJzxK2vudsacM9s"
 			]
 		}
 	},

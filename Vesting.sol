@@ -18,7 +18,7 @@ contract Vesting {
 
     mapping(address=>uint256) vestedAmount;
     mapping(address=>uint256) public withdrawableAmount;
-
+  
 
     constructor(address _token) {
         token = IERC20(_token);
@@ -69,7 +69,7 @@ contract Vesting {
         require(_benificiary == msg.sender,"Only benificiar can withdraw");
         require(withdrawableAmount[_benificiary]>0,"No amount to be withdrawn");
         withdrawableAmount[_benificiary]-=withdrawAmount;
-        token.transferFrom(address(this),_benificiary,withdrawAmount);       
+        token.transfer(_benificiary,withdrawAmount);       
 
     }
 
