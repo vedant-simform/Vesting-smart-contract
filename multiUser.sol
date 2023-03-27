@@ -5,10 +5,10 @@ import ".deps/npm/@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract Vesting {
     IERC20 token;
-    address _benificiary;
-
+    address owner;
     mapping(address=>uint256) vestedAmount;
     mapping(address=>uint256) public withdrawableAmount;
+    mapping(address => VestingSchedule) public vestingSchedules;
 
     event DepositTokens(address _from,address _to,uint256 totalTokens);
     event VestedTokens(address _benificiary,uint256 vestedTopkens);
@@ -16,22 +16,25 @@ contract Vesting {
 
     constructor(address _token) {
         token = IERC20(_token);
+        owner = msg.sender;
+    }
+
+    modifier onlyOwner(){
+        require(msg.sender == owner,"Only Owner can access");
+        _;
     }
 
     struct VestingSchedule {
-    uint256 _startTime;
-    uint256 _cliff;
-    uint256 _vestingPeriod;
-    uint256 _slicePeriod;
-    uint256 _totalTokens;
-    uint256 _releasedTokens;
-    uint256 _vestedTokens;
-    uint256 _elaspTime;
+        uint256 _startTime;
+        uint256 _cliff;
+        uint256 _vestingPeriod;
+        uint256 _slicePeriod;
+        uint256 _totalTokens;
+        uint256 _releasedTokens;
+        uint256 _vestedTokens;
+        uint256 _elaspTime;
     }
-    mapping(address => VestingSchedule) public vestingSchedules;
-
-
-
+    
     function addAmount(address benificiary,uint256 totalTokens, uint256 startTime,uint256 cliff,uint256 vestingPeriod,uint256 slicePeriod) public payable {
         
         vestingSchedules[benificiary] = VestingSchedule({
@@ -55,7 +58,7 @@ contract Vesting {
         return token.balanceOf(account);
     }
 
-    function release(address benificiary) public returns(uint256) {
+    function releaseTokens(address benificiary) public onlyOwner returns(uint256) {
         withdrawableAmount[benificiary]+=calculateVestedAmount(benificiary);
         return withdrawableAmount[benificiary];
     }
@@ -90,5 +93,4 @@ contract Vesting {
         emit WithdrawTokens(benificiary,withdrawAmount);
         token.transfer(benificiary,withdrawAmount);               
     }
-
 }

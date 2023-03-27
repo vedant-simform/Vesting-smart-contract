@@ -163,7 +163,7 @@
 						"type": "address"
 					}
 				],
-				"name": "release",
+				"name": "releaseTokens",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -302,11 +302,11 @@
 			]
 		},
 		"multiUser.sol": {
-			"keccak256": "0x4ab7363a080f33a0eba67092f2a03c6d71c8e743a2a920100b77a1c9d95c9809",
+			"keccak256": "0x9899361ddec79f20d27abd8ae70dee65d825979a06a8b70d7fb6dabc0378c03d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://38f3d85fe91ce7637e4961655b5eff9f3d67cbe74365ca03a95a8669253ea5b0",
-				"dweb:/ipfs/QmQcRvwPUGgWek5ai92ACJkd7ecg6Ls81hLQJ6322zVpDj"
+				"bzz-raw://fe1a38340f412c39fb26da9c10f8bb60e9e64c69b43eea108686e4a63ee19364",
+				"dweb:/ipfs/QmWC8cGrFzbR1Ms7PJ8emEr2EGiCUEHi2JKz2YSiH98bsC"
 			]
 		}
 	},
