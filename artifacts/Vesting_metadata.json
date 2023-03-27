@@ -49,13 +49,19 @@
 						"type": "uint256"
 					}
 				],
-				"name": "addAmountToVest",
+				"name": "addAmount",
 				"outputs": [],
 				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "benificiary",
+						"type": "address"
+					}
+				],
 				"name": "calculateVestedAmount",
 				"outputs": [
 					{
@@ -87,7 +93,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "benificiary",
+						"type": "address"
+					}
+				],
 				"name": "release",
 				"outputs": [
 					{
@@ -156,6 +168,11 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "benificiary",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "withdrawAmount",
 						"type": "uint256"
@@ -222,11 +239,11 @@
 			]
 		},
 		"multiUser.sol": {
-			"keccak256": "0x931b546d021af34aa52b0b5b4764a40152653c6156981afce597c666510d6702",
+			"keccak256": "0xd826d6d8392caa1b0e8b94b13d8eb2533858470ffe96aed7d005477df6cd1324",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c9151fdce587b7960d10c0d039e6823034a55433a642661829b766051da769c3",
-				"dweb:/ipfs/QmYD9EUwk7PiSZHeNAvarBsUeMyf2yxeJzxK2vudsacM9s"
+				"bzz-raw://0c94e7d7318048e70f5b266f33d8e29e77404ff9c599a55c2d21ce824ca6932b",
+				"dweb:/ipfs/QmNRAFcGishFwhZxaPzsyhMCTuxinXiuCGdWD7XbHaNpx3"
 			]
 		}
 	},

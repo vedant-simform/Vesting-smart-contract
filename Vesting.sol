@@ -56,7 +56,7 @@ contract Vesting {
             currentTime = _startTime+_vestingPeriod;
         }            
         _elaspTime = currentTime - _startTime;
-        uint256 intervalElasped = _elaspTime/ intervals;
+        uint256 intervalElasped = _elaspTime/ _slicePeriod;
         
         vestedTokens = (intervalElasped * tokensInInterval)-_relesedTokens;
         _relesedTokens += vestedTokens;
