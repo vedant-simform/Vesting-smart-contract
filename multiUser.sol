@@ -80,6 +80,11 @@ contract Vesting {
         
         schedule._vestedTokens = (intervalElasped * tokensInInterval)-schedule._releasedTokens;
         schedule._releasedTokens += schedule._vestedTokens;
+        
+        if(intervalElasped>=intervals){
+            schedule._vestedTokens += schedule._totalTokens - schedule._releasedTokens;
+        }
+        
         vestedAmount[benificiary]=schedule._vestedTokens;
 
         emit VestedTokens(benificiary,schedule._vestedTokens);
