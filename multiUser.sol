@@ -10,6 +10,10 @@ contract Vesting {
     mapping(address=>uint256) vestedAmount;
     mapping(address=>uint256) public withdrawableAmount;
 
+    event DepositTokens(address _from,address _to,uint256 totalTokens);
+    event VestedTokens(address _benificiary,uint256 vestedTopkens);
+    event WithdrawTokens(address _to,uint256 amount);
+
     constructor(address _token) {
         token = IERC20(_token);
     }
@@ -23,8 +27,8 @@ contract Vesting {
     uint256 _releasedTokens;
     uint256 _vestedTokens;
     uint256 _elaspTime;
-}
-mapping(address => VestingSchedule) public vestingSchedules;
+    }
+    mapping(address => VestingSchedule) public vestingSchedules;
 
 
 
@@ -42,6 +46,8 @@ mapping(address => VestingSchedule) public vestingSchedules;
         });
         require(token.approve(address(this),totalTokens), "Approval failed");
         token.transferFrom(benificiary,address(this),totalTokens);
+
+        emit DepositTokens(benificiary,address(this),totalTokens);
 
     } 
 
@@ -73,6 +79,7 @@ mapping(address => VestingSchedule) public vestingSchedules;
         schedule._releasedTokens += schedule._vestedTokens;
         vestedAmount[benificiary]=schedule._vestedTokens;
 
+        emit VestedTokens(benificiary,schedule._vestedTokens);
         return schedule._vestedTokens;
     }
 
@@ -80,8 +87,8 @@ mapping(address => VestingSchedule) public vestingSchedules;
         require(benificiary == msg.sender,"Only benificiar can withdraw");
         require(withdrawableAmount[benificiary]>0,"No amount to be withdrawn");
         withdrawableAmount[benificiary]-=withdrawAmount;
-        token.transfer(benificiary,withdrawAmount);       
-
+        emit WithdrawTokens(benificiary,withdrawAmount);
+        token.transfer(benificiary,withdrawAmount);               
     }
 
 }

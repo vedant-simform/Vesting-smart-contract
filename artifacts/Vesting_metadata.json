@@ -17,6 +17,69 @@
 				"type": "constructor"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_from",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "totalTokens",
+						"type": "uint256"
+					}
+				],
+				"name": "DepositTokens",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_benificiary",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "vestedTopkens",
+						"type": "uint256"
+					}
+				],
+				"name": "VestedTokens",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_to",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "WithdrawTokens",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -239,11 +302,11 @@
 			]
 		},
 		"multiUser.sol": {
-			"keccak256": "0xd826d6d8392caa1b0e8b94b13d8eb2533858470ffe96aed7d005477df6cd1324",
+			"keccak256": "0x4ab7363a080f33a0eba67092f2a03c6d71c8e743a2a920100b77a1c9d95c9809",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0c94e7d7318048e70f5b266f33d8e29e77404ff9c599a55c2d21ce824ca6932b",
-				"dweb:/ipfs/QmNRAFcGishFwhZxaPzsyhMCTuxinXiuCGdWD7XbHaNpx3"
+				"bzz-raw://38f3d85fe91ce7637e4961655b5eff9f3d67cbe74365ca03a95a8669253ea5b0",
+				"dweb:/ipfs/QmQcRvwPUGgWek5ai92ACJkd7ecg6Ls81hLQJ6322zVpDj"
 			]
 		}
 	},
