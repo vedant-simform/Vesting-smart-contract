@@ -94,8 +94,8 @@ contract Vesting {
     function withdraw(address benificiary,uint256 withdrawAmount) public {
         require(benificiary == msg.sender,"Only benificiar can withdraw");
         require(withdrawableAmount[benificiary]>0,"No amount to be withdrawn");
-        withdrawableAmount[benificiary]-=withdrawAmount;
+        withdrawableAmount[benificiary]-=withdrawAmount;        
+        token.transfer(benificiary,withdrawAmount);     
         emit WithdrawTokens(benificiary,withdrawAmount);
-        token.transfer(benificiary,withdrawAmount);               
     }
 }
