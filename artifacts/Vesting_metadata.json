@@ -6,13 +6,7 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_token",
-						"type": "address"
-					}
-				],
+				"inputs": [],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -83,6 +77,11 @@
 				"inputs": [
 					{
 						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
 						"name": "benificiary",
 						"type": "address"
 					},
@@ -114,7 +113,7 @@
 				],
 				"name": "addAmount",
 				"outputs": [],
-				"stateMutability": "payable",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -138,6 +137,11 @@
 			},
 			{
 				"inputs": [
+					{
+						"internalType": "address",
+						"name": "token",
+						"type": "address"
+					},
 					{
 						"internalType": "address",
 						"name": "account",
@@ -184,6 +188,11 @@
 				],
 				"name": "vestingSchedules",
 				"outputs": [
+					{
+						"internalType": "contract IERC20",
+						"name": "_token",
+						"type": "address"
+					},
 					{
 						"internalType": "uint256",
 						"name": "_startTime",
@@ -279,7 +288,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"multiUser.sol": "Vesting"
+			"Vesting.sol": "Vesting"
 		},
 		"evmVersion": "paris",
 		"libraries": {},
@@ -293,7 +302,7 @@
 		"remappings": []
 	},
 	"sources": {
-		".deps/npm/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+		"@openzeppelin/contracts/token/ERC20/IERC20.sol": {
 			"keccak256": "0x9750c6b834f7b43000631af5cc30001c5f547b3ceb3635488f140f60e897ea6b",
 			"license": "MIT",
 			"urls": [
@@ -301,12 +310,12 @@
 				"dweb:/ipfs/QmebXWgtEfumQGBdVeM6c71McLixYXQP5Bk6kKXuoY4Bmr"
 			]
 		},
-		"multiUser.sol": {
-			"keccak256": "0x9899361ddec79f20d27abd8ae70dee65d825979a06a8b70d7fb6dabc0378c03d",
+		"Vesting.sol": {
+			"keccak256": "0x09c0eb79f02a2c5aa737d5f6583755fd2e54fc0c07706a42b0197d43e9ec2add",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fe1a38340f412c39fb26da9c10f8bb60e9e64c69b43eea108686e4a63ee19364",
-				"dweb:/ipfs/QmWC8cGrFzbR1Ms7PJ8emEr2EGiCUEHi2JKz2YSiH98bsC"
+				"bzz-raw://57c04d80b5e749309ee2eee2506419d76b1a1f01f4fbfef7321c9517e8aab558",
+				"dweb:/ipfs/QmQdeP3mYbFwbEsG1d9Qa3DUcXxtL9bA1MyKAaqR1BaE2Z"
 			]
 		}
 	},
