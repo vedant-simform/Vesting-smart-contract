@@ -5,12 +5,15 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract Vesting {
     address owner;
     mapping(address=>uint256) vestedAmount;
-    mapping(address=>uint256) public withdrawableAmount;
-    mapping(address => VestingSchedule) public vestingSchedules;
+    mapping(address=>mapping(uint256=> uint256)) public withdrawableAmount;
+    mapping(address => mapping(uint256=> VestingSchedule)) public vestingSchedules;
 
     event DepositTokens(address _from,address _to,uint256 totalTokens);
     event VestedTokens(address _benificiary,uint256 vestedTopkens);
     event WithdrawTokens(address _to,uint256 amount);
+
+    mapping(address=>uint256) totalVesting;
+
 
     constructor() {
         owner = msg.sender;
@@ -31,11 +34,11 @@ contract Vesting {
         uint256 _releasedTokens;
         uint256 _vestedTokens;
         uint256 _elaspTime;
+        uint256 _vestingID;
     }
     
     function addAmount(address token,address benificiary,uint256 totalTokens, uint256 startTime,uint256 cliff,uint256 vestingPeriod,uint256 slicePeriod) public {
-        
-        vestingSchedules[benificiary] = VestingSchedule({
+        vestingSchedules[benificiary][totalVesting[benificiary]] = VestingSchedule({
         _token : IERC20(token),
         _startTime : startTime,
         _cliff : cliff ,
@@ -44,12 +47,14 @@ contract Vesting {
         _totalTokens : totalTokens,   
         _releasedTokens : 0,
         _vestedTokens : 0 ,
-        _elaspTime : 0
+        _elaspTime : 0,
+        _vestingID : totalVesting[benificiary]
         });
+       
         require(totalTokens>0,"Add some tokens");
-        require(vestingSchedules[benificiary]._token.approve(address(this),totalTokens), "Approval failed");
-        vestingSchedules[benificiary]._token.transferFrom(benificiary,address(this),totalTokens);
-
+        require(vestingSchedules[benificiary][totalVesting[benificiary]]._token.approve(address(this),totalTokens), "Approval failed");
+        vestingSchedules[benificiary][totalVesting[benificiary]]._token.transferFrom(benificiary,address(this),totalTokens);
+        totalVesting[benificiary]++;
         emit DepositTokens(benificiary,address(this),totalTokens);
 
     } 
@@ -58,13 +63,13 @@ contract Vesting {
         return IERC20(token).balanceOf(account);
     }
 
-    function releaseTokens(address benificiary) public onlyOwner returns(uint256) {
-        withdrawableAmount[benificiary]+=calculateVestedAmount(benificiary);
-        return withdrawableAmount[benificiary];
+    function releaseTokens(address benificiary,uint256 vestingID) public onlyOwner returns(uint256) {
+        withdrawableAmount[benificiary][vestingID]+=calculateVestedAmount(benificiary,vestingID);
+        return withdrawableAmount[benificiary][vestingID];
     }
 
-    function calculateVestedAmount(address benificiary) public returns(uint256) {
-        VestingSchedule storage schedule = vestingSchedules[benificiary];
+    function calculateVestedAmount(address benificiary,uint256 vestingID) public returns(uint256) {
+        VestingSchedule storage schedule = vestingSchedules[benificiary][vestingID];
 
         require(schedule._startTime+schedule._slicePeriod <= block.timestamp,"No Token vested yet");
         
@@ -86,16 +91,17 @@ contract Vesting {
         }
         
         vestedAmount[benificiary]=schedule._vestedTokens;
+        
 
         emit VestedTokens(benificiary,schedule._vestedTokens);
         return schedule._vestedTokens;
     }
 
-    function withdraw(address benificiary,uint256 withdrawAmount) public {
+    function withdraw(address benificiary,uint256 withdrawAmount,uint256 vestingID ) public {
         require(benificiary == msg.sender,"Only benificiar can withdraw");
-        require(withdrawableAmount[benificiary]>0,"No amount to be withdrawn");
-        withdrawableAmount[benificiary]-=withdrawAmount;        
-        vestingSchedules[benificiary]._token.transfer(benificiary,withdrawAmount);     
+        require(withdrawableAmount[benificiary][vestingID]>0,"No amount to be withdrawn");
+        withdrawableAmount[benificiary][vestingID]-=withdrawAmount;        
+        vestingSchedules[benificiary][vestingID]._token.transfer(benificiary,withdrawAmount);     
         emit WithdrawTokens(benificiary,withdrawAmount);
     }
 }

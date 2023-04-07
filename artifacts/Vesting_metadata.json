@@ -122,6 +122,11 @@
 						"internalType": "address",
 						"name": "benificiary",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "vestingID",
+						"type": "uint256"
 					}
 				],
 				"name": "calculateVestedAmount",
@@ -165,6 +170,11 @@
 						"internalType": "address",
 						"name": "benificiary",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "vestingID",
+						"type": "uint256"
 					}
 				],
 				"name": "releaseTokens",
@@ -184,6 +194,11 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"name": "vestingSchedules",
@@ -232,6 +247,11 @@
 						"internalType": "uint256",
 						"name": "_elaspTime",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_vestingID",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -248,6 +268,11 @@
 						"internalType": "uint256",
 						"name": "withdrawAmount",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "vestingID",
+						"type": "uint256"
 					}
 				],
 				"name": "withdraw",
@@ -261,6 +286,11 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"name": "withdrawableAmount",
@@ -311,11 +341,11 @@
 			]
 		},
 		"Vesting.sol": {
-			"keccak256": "0x09c0eb79f02a2c5aa737d5f6583755fd2e54fc0c07706a42b0197d43e9ec2add",
+			"keccak256": "0xa35aebe69420be2357357cdd8016f2a0e99fce2c6eb246044c337680a7082d9f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://57c04d80b5e749309ee2eee2506419d76b1a1f01f4fbfef7321c9517e8aab558",
-				"dweb:/ipfs/QmQdeP3mYbFwbEsG1d9Qa3DUcXxtL9bA1MyKAaqR1BaE2Z"
+				"bzz-raw://80a73397473724906e74b9459054b5cd87328abbc15e15ee6503be084200c820",
+				"dweb:/ipfs/QmcpTgjh3LJzB1M9bA1CEQaH84YUCqLD9iTQFZRPBjGLav"
 			]
 		}
 	},
