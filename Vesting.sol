@@ -8,9 +8,9 @@ contract Vesting {
     mapping(address=>mapping(uint256=> uint256)) public withdrawableAmount;
     mapping(address => mapping(uint256=> VestingSchedule)) public vestingSchedules;
 
-    event DepositTokens(address _from,address _to,uint256 totalTokens);
+    event TokenDeposited(address _from,address _to,uint256 totalTokens);
     event VestedTokens(address _benificiary,uint256 vestedTopkens);
-    event WithdrawTokens(address _to,uint256 amount);
+    event WithdrewTokens(address _to,uint256 amount);
 
     mapping(address=>uint256) totalVesting;
 
@@ -37,7 +37,7 @@ contract Vesting {
         uint256 _vestingID;
     }
     
-    function addAmount(address token,address benificiary,uint256 totalTokens, uint256 startTime,uint256 cliff,uint256 vestingPeriod,uint256 slicePeriod) public {
+    function addVestingTokens(address token,address benificiary,uint256 totalTokens, uint256 startTime,uint256 cliff,uint256 vestingPeriod,uint256 slicePeriod) public {
         vestingSchedules[benificiary][totalVesting[benificiary]] = VestingSchedule({
         _token : IERC20(token),
         _startTime : startTime,
@@ -52,10 +52,10 @@ contract Vesting {
         });
        
         require(totalTokens>0,"Add some tokens");
-        require(vestingSchedules[benificiary][totalVesting[benificiary]]._token.approve(address(this),totalTokens), "Approval failed");
+        require(vestingPeriod>=slicePeriod,"Slice Period must be less than Vesting period");
         vestingSchedules[benificiary][totalVesting[benificiary]]._token.transferFrom(benificiary,address(this),totalTokens);
         totalVesting[benificiary]++;
-        emit DepositTokens(benificiary,address(this),totalTokens);
+        emit TokenDeposited(benificiary,address(this),totalTokens);
 
     } 
 
@@ -72,7 +72,7 @@ contract Vesting {
         VestingSchedule storage schedule = vestingSchedules[benificiary][vestingID];
 
         require(schedule._startTime+schedule._slicePeriod <= block.timestamp,"No Token vested yet");
-        
+        require(schedule._releasedTokens<schedule._totalTokens,"All Tokens are released");
         uint256 intervals = (schedule._vestingPeriod) / (schedule._slicePeriod);
         uint256 tokensInInterval = schedule._totalTokens /intervals;
 
@@ -91,7 +91,6 @@ contract Vesting {
         }
         
         vestedAmount[benificiary]=schedule._vestedTokens;
-        
 
         emit VestedTokens(benificiary,schedule._vestedTokens);
         return schedule._vestedTokens;
@@ -102,6 +101,6 @@ contract Vesting {
         require(withdrawableAmount[benificiary][vestingID]>0,"No amount to be withdrawn");
         withdrawableAmount[benificiary][vestingID]-=withdrawAmount;        
         vestingSchedules[benificiary][vestingID]._token.transfer(benificiary,withdrawAmount);     
-        emit WithdrawTokens(benificiary,withdrawAmount);
+        emit WithdrewTokens(benificiary,withdrawAmount);
     }
 }
